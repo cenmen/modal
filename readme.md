@@ -1,66 +1,109 @@
 ## 概述
-满足小众场景的 select 组件，支持多选与删除，可搜索过滤目标项，极其适合HTML上使用，源码简单易读，可拷贝主目录下的 select.js 进行二次开发。
+
+使用 Web Components 组件化语法开发的 modal & dialog 对话框组件
 
 ## API
-| Field              | Type                      | Default              | Description                              |
-| ------------------ | --------------------------| ---------------------| ---------------------------------------- |
-| `id`               | `string`                  | `-`                  | 容器ID |
-| `list`             | `string`                  | `-`                  | 下拉选择列表 |
-| `disabled?`        | `boolean`                 | `false`              | 是否禁用 |
-| `valueKey?`        | `string`                  | `-`                  | 下拉项标识的键名，list 子项为对象类型时必填 |
-| `multiple?`        | `boolean`                 | `false`              | 是否多选 |
-| `multipleLimit?`   | `number`                  | `-`                  | 多选时最多选多少项 |
-| `inputClass?`      | `array`                   | `-`                  | 最外层选择框的 class 样式名 |
-| `contentClass?`    | `array`                   | `-`                  | 下拉选择框的 class 样式名 |
-| `chioceItemClass?` | `array`                   | `-`                  | 选择项的 class 样式名 |
-| `onInput?`         | `function (value)`        | `-`                  | 输入框输入触发回调 |
-| `onChange?`        | `function (item)`         | `-`                  | 点击选择项回调 |
-| `getData?`         | `function ()`             | `-`                  | 获取选择结果 |
 
-## 说明
-select.js 中有预设值的 style 样式，设置以下样式一般建议加上：
-```css
-/* contentClass */
-.content {
-  position: absolute; 
-  border: 1px solid black; 
-  width: 100%; 
-  box-sizing: border-box;
+### modal
+
+| Field    | Type     | Default    | Description |
+| -------- | -------- | ---------- | ----------- |
+| `enter?` | `string` | `FADE_IN`  | 进入动画    |
+| `leave?` | `string` | `FADE_OUT` | 离开动画    |
+
+```javascript
+const ANIMATE_POSITION = {
+  /* 屏幕上方 */
+  OVER_TOP: 'OVER_TOP',
+  /* 屏幕下方 */
+  BELOW_BOTTOM: 'BELOW_BOTTOM',
+  /* 屏幕正中放大 */
+  ZOOM_IN: 'ZOOM_IN',
+  /* 屏幕正中缩小 */
+  ZOOM_OUT: 'ZOOM_OUT',
+  /* 淡入 */
+  FADE_IN: 'FADE_IN',
+  /* 淡出 */
+  FADE_OUT: 'FADE_OUT',
 }
 ```
 
-## 使用
-```javascript
-// demo.html
-let total = [
-  { name: '111' },
-  { name: '222' },
-  { name: '333' },
-  { name: '444' },
-  { name: '555' },
-  { name: '666' },
-  { name: '777' },
-  { name: '888' },
-  { name: '999' },
-]
-const search = new Search({
-  id: 'search',
-  list: total,
-  multiple: true,
-  valueKey: 'name',
-  multipleLimit: 5,
-  contentClass: ['content'],
-  chioceItemClass: ['chioce'],
-  onInput: onInput,
-  onChange: onChange,
-})
-function onInput(val) {
-  search.list = total.filter(item => item.includes(val))
-}
-function onChange(item) {
-  console.log('==> onChange', item);
-}
+### dialog
+
+| Field             | Type       | Default | Description            |
+| ----------------- | ---------- | ------- | ---------------------- |
+| `title?`          | `string`   | `-`     | 标题                   |
+| `body?`           | `string`   | `-`     | 内容                   |
+| `cancelText?`     | `string`   | `-`     | 取消按钮文字           |
+| `confirmText?`    | `string`   | `-`     | 确定按钮文字           |
+| `onClickClose?`   | `function` | `-`     | 点击右上角关闭图标回调 |
+| `onClickCancel?`  | `function` | `-`     | 点击取消按钮回调       |
+| `onClickConfirm?` | `function` | `-`     | 点击确定按钮回调       |
+
+## 使用实例
+
+```html
+// modal.html
+<body>
+  <button onclick="show()">show</button>
+  <template id="modal-container">
+    <style>
+      .content {
+        background: #ffffff;
+        border: 1px solid red;
+        padding: 10px;
+      }
+    </style>
+    <div>
+      <slot>
+        <div class="content">modal</div>
+      </slot>
+    </div>
+  </template>
+
+  <modal-container enter="OVER_TOP" leave="BELOW_BOTTOM"></modal-container>
+
+  <script src="./modal.js"></script>
+  <script src="./dialog.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    /* template 的内容会被复制到 modal-container 内部定义的位置 */
+    const modal = document.querySelector('modal-container')
+
+    function show() {
+      modal.show()
+    }
+  </script>
+</body>
+```
+
+## 使用实例
+
+```html
+// dialog.html
+<body>
+  <button onclick="show()">show</button>
+
+  <dialog-container title="标题" body="内容啦！"></dialog-container>
+
+  <script src="./modal.js"></script>
+  <script src="./dialog.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    const dialog = document.querySelector('dialog-container')
+
+    dialog.onClickConfirm = function (e) {
+      console.log('==> onClickConfirm')
+      // dialog.close()
+    }
+
+    function show() {
+      dialog.show()
+    }
+  </script>
+</body>
 ```
 
 ## 写在最后
+
 喜欢的可以点个 star✨，谢谢！

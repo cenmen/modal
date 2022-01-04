@@ -1,0 +1,60 @@
+.dialog-contianer {
+  background: #FFFFFF;
+  border-radius: 4px;
+  padding: 20px;
+  width: 500px;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-header__title {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.dialog-header__close{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dialog-content {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  word-break: break-all;
+  align-items: center;
+  font-size: 20px;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  height: 30px;
+}
+
+.dialog-footer button {
+  height: 100%;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#dialog-cancel {
+  background: #FFFFFF;
+  border: 1px solid #808080;
+}
+
+#dialog-confirm {
+  margin-left: 20px;
+  color: #FFFFFF;
+  background: #3894ff;
+  border: 1px solid #3894ff;
+}

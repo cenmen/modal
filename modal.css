@@ -1,0 +1,102 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+@keyframes overTop {
+  0% {
+    transform: translateY(-1000px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.OVER_TOP {
+  position: relative;
+  animation-name: overTop;
+  animation-duration: 1s;
+}
+
+@keyframes belowBottom {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(1000px);
+  }
+}
+
+.BELOW_BOTTOM {
+  position: relative;
+  animation-name: belowBottom;
+  animation-duration: 1s;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0, 0);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.ZOOM_IN {
+  position: relative;
+  animation-name: zoomIn;
+  animation-duration: 1s;
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(0, 0);
+  }
+}
+
+.ZOOM_OUT {
+  position: relative;
+  animation-name: zoomOut;
+  animation-duration: 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.FADE_IN {
+  position: relative;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.FADE_OUT {
+  position: relative;
+  animation-name: fadeOut;
+  animation-duration: 1s;
+}

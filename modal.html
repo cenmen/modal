@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="show()">show</button>
+    <template id="modal-container">
+      <style>
+        .content {
+          background: #FFFFFF;
+          border: 1px solid red;
+          padding: 10px;
+        }
+      </style>
+      <div>
+        <slot>
+          <div class="content">modal</div>
+        </slot>
+      </div>
+    </template>
+
+    <modal-container enter="OVER_TOP" leave="BELOW_BOTTOM"></modal-container>
+
+    <script src="./modal.js"></script>
+    <script src="./dialog.js"></script>
+    <script src="./index.js"></script>
+    <script>
+      /* template 的内容会被复制到 modal-container 内部定义的位置 */
+      const modal = document.querySelector('modal-container')
+
+      function show() {
+        modal.show()
+      }
+    </script>
+  </body>
+</html>
